@@ -14,20 +14,20 @@ public class guessingGame {
 
         int level = scanner.nextInt();
         int maxNumber;
-        int maxAttemps;
+        int maxAttempts;
 
         switch(level) {
             case 1:
                 maxNumber = 10;
-                maxAttemps = 5;
+                maxAttempts = 5;
                 break;
             case 2:
                 maxNumber = 50;
-                maxAttemps = 10;
+                maxAttempts = 10;
                 break;
             case 3:
                 maxNumber = 100;
-                maxAttemps = 15;
+                maxAttempts = 15;
                 break;
             default:
                 System.out.println("Level invalid, the game is over");
@@ -37,9 +37,20 @@ public class guessingGame {
 
         System.out.println("You have selected " + level + ".");
         System.out.println("You must guess a number from 1 to " + maxNumber + ".");
-        System.out.println("You have " + maxAttemps + " attempts.");
+        System.out.println("You have " + maxAttempts + " attempts.");
 
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            System.out.println("Attempt #" + attempt + ": ");
+            int enteredNumber = scanner.nextInt();
 
-
+            if (enteredNumber == secretNumber) {
+                System.out.println("Congratulations!!; You guessed the number in " + attempt + " attempts!");
+                return;
+            } else {
+                System.out.println("Incorrect number, Try again :(");
+            }
+        }
+        System.out.println("Sorry, you have exhausted your attempts.");
+        System.out.println("the secret number was: " + secretNumber);
     }
 }
