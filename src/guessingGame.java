@@ -15,19 +15,23 @@ public class guessingGame {
         int level = scanner.nextInt();
         int maxNumber;
         int maxAttempts;
+        int threshold;
 
-        switch(level) {
+        switch (level) {
             case 1:
                 maxNumber = 10;
                 maxAttempts = 5;
+                threshold = 2;
                 break;
             case 2:
                 maxNumber = 50;
                 maxAttempts = 10;
+                threshold = 5;
                 break;
             case 3:
                 maxNumber = 100;
                 maxAttempts = 15;
+                threshold = 10;
                 break;
             default:
                 System.out.println("Level invalid, the game is over");
@@ -43,11 +47,19 @@ public class guessingGame {
             System.out.println("Attempt #" + attempt + ": ");
             int enteredNumber = scanner.nextInt();
 
+            if (enteredNumber < 1 || enteredNumber > maxNumber) {
+                System.out.println("Invalid number. Please enter a number between 1 and " + maxNumber + ".");
+                attempt--;
+                continue;
+            }
+
             if (enteredNumber == secretNumber) {
                 System.out.println("Congratulations!!; You guessed the number in " + attempt + " attempts!");
                 return;
             } else {
-                System.out.println("Incorrect number, Try again :(");
+                int difference = Math.abs(enteredNumber - secretNumber);
+                String hint = (difference <= threshold) ? "You're close!" : "You're far!";
+                System.out.println(hint);
             }
         }
         System.out.println("Sorry, you have exhausted your attempts.");
